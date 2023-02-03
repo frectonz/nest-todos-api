@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
-import { login } from "./api";
 import { Root, Login, Register } from "./routes";
-import { AuthStoreProvider, useAuthDispatch } from "./stores/auth";
+import { AuthStoreProvider } from "./stores/auth";
 
+const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,8 +25,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <AuthStoreProvider>
-      <RouterProvider router={router} />
-    </AuthStoreProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthStoreProvider>
+        <RouterProvider router={router} />
+      </AuthStoreProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );

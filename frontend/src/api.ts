@@ -37,3 +37,27 @@ export const register = async (
 
   return await response.json();
 };
+
+type Todo = {
+  id: number;
+  title: string;
+  completed: boolean;
+};
+
+export const getTodos = async (
+  token: string
+): Promise<
+  | Todo[]
+  | {
+      statusCode: number;
+      message: string;
+    }
+> => {
+  const response = await fetch(`${API_URL}/todos`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return await response.json();
+};
