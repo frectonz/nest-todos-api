@@ -1,13 +1,10 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
-export class TodosService implements OnModuleInit {
+export class TodosService {
   constructor(private prisma: PrismaService) {}
-
-  async onModuleInit() {
-    await this.prisma.todo.deleteMany();
-  }
 
   create(title: string, userId: number) {
     return this.prisma.todo.create({
