@@ -15,10 +15,12 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  it('/auth/register (POST)', async () => {
+    const req = await request(app.getHttpServer()).post('/auth/register').send({
+      username: 'test',
+      password: 'test',
+    });
+
+    expect(req.status).toBe(201);
   });
 });
