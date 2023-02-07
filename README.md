@@ -115,3 +115,5 @@ async function bootstrap() {
   await app.listen(3000);
 }
 ```
+
+Checkout the `fastify` branch for an example of using Fastify.
